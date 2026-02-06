@@ -1,1 +1,19 @@
+import { test, expect } from '@playwright/test';
+
+test('should greet user by name', async ({ page }) => {
+  // Load the local HTML file
+  await page.goto('file://' + process.cwd() + '/index.html');
+
+  // Verify page title text
+  await expect(page.locator('#title')).toHaveText('Hello Playwright');
+
+  // Type a name
+  await page.fill('#nameInput', 'Alex');
+
+  // Click the button
+  await page.click('#greetBtn');
+
+  // Assert greeting message
+  await expect(page.locator('#message')).toHaveText('Hello, Alex!');
+});
 
